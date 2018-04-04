@@ -1,6 +1,6 @@
 var scene, camera, renderer;
 
-var WIDTH  = 500PX;
+var WIDTH  = window.innerWidth;
 var HEIGHT = window.innerHeight;
 
 var SPEED = 0.01;
@@ -12,8 +12,9 @@ function init() {
     initCamera();
     initLights();
     initRenderer();
-
-    document.body.appendChild(renderer.domElement);
+    $('#container').append(renderer.domElement);
+    //
+    // document.body.appendChild(renderer.domElement);
 }
 
 function initCamera() {
@@ -26,6 +27,7 @@ function initCamera() {
 function initRenderer() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(WIDTH, HEIGHT);
+
 }
 
 function initLights() {
@@ -58,7 +60,8 @@ function render() {
     requestAnimationFrame(render);
     rotateMesh();
     renderer.render(scene, camera);
+
 }
 
-//init();
-//render();
+init();
+render();
