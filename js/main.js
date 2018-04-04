@@ -7,6 +7,7 @@ var SPEED = 0.01;
 
 function init() {
     scene = new THREE.Scene();
+    scene.background = new THREE.Color( 0xf0f0f0 );
 
     initMesh();
     initCamera();
