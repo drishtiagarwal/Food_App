@@ -5,11 +5,11 @@ var HEIGHT = window.innerHeight;
 
 var SPEED = 0.01;
 
-function init() {
+function init(x) {
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xf0f0f0 );
 
-    initMesh();
+    initMesh(x);
     initCamera();
     initLights();
     initRenderer();
@@ -37,12 +37,13 @@ function initLights() {
 }
 
 var mesh = null;
-function initMesh() {
+function initMesh(x) {
     var loader = new THREE.JSONLoader();
     loader.load('./testing.json', function(geometry, materials) {
         mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
         mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
-        mesh.translation = THREE.GeometryUtils.center(geometry);
+        // mesh.translation = THREE.GeometryUtils.center(geometry);
+        mesh.position.setX(x);
         scene.add(mesh);
     });
 }
@@ -64,5 +65,7 @@ function render() {
 
 }
 
-init();
+init(-2);
+initMesh(1);
+rotateMesh();
 render();
