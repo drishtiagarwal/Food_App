@@ -60,12 +60,19 @@ function rotateMesh() {
 
 function render() {
     requestAnimationFrame(render);
-    rotateMesh();
+    for(var i=0;i<scene.children.length;i++)
+    {
+        if(scene.children[i].type==="Mesh")
+        {
+            mesh=scene.children[i];
+            rotateMesh();
+            scene.children[i]=mesh;
+        }
+    }
     renderer.render(scene, camera);
 
 }
 
 init(-2);
 initMesh(1);
-rotateMesh();
 render();
