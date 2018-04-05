@@ -4,7 +4,11 @@ var WIDTH  = window.innerWidth;
 var HEIGHT = window.innerHeight;
 
 var SPEED = 0.01;
-
+var first = -6;
+var second = -3;
+var third = 0;
+var fourth = 3;
+var fifth = 6;
 function init(positionX,containerName) {
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xf0f0f0 );
@@ -19,7 +23,7 @@ function init(positionX,containerName) {
 }
 
 function initCamera() {
-    camera = new THREE.PerspectiveCamera(90, WIDTH / HEIGHT, 1, 10);
+    camera = new THREE.PerspectiveCamera(80, WIDTH / HEIGHT, 1, 10);
     camera.position.set(0, 3.5, 5);
     camera.lookAt(scene.position);
 }
@@ -41,9 +45,19 @@ function initMesh(x) {
     var loader = new THREE.JSONLoader();
     loader.load('./testing.json', function(geometry, materials) {
         mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-        mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
+        if(x==first || x==fifth){
+          mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.25;
+        }
+        if(x==second || x==fourth){
+          mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.50;
+        }
+        if(x==third){
+          mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
+        }
+
         // mesh.translation = THREE.GeometryUtils.center(geometry);
         mesh.position.setX(x);
+        mesh.position.setY(2);
         scene.add(mesh);
     });
 }
@@ -53,9 +67,9 @@ function rotateMesh() {
         return;
     }
 
-    mesh.rotation.x -= SPEED * 2;
+  //  mesh.rotation.x -= SPEED * 2;
     mesh.rotation.y -= SPEED;
-    mesh.rotation.z -= SPEED * 3;
+  //  mesh.rotation.z -= SPEED * 3;
 }
 
 function render() {
@@ -73,12 +87,9 @@ function render() {
 
 }
 
-init(-8,'container1');
+init(first,'container1');
 render();
-initMesh(-5);
-initMesh(-2);
-initMesh(1);
-initMesh(4);
-initMesh(7);
-initMesh(10);
-initMesh(13);
+initMesh(second);
+initMesh(third);
+initMesh(fourth);
+initMesh(fifth);
