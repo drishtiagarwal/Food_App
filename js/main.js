@@ -5,15 +5,15 @@ var HEIGHT = window.innerHeight;
 
 var SPEED = 0.01;
 
-function init() {
+function init(positionX,containerName) {
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xf0f0f0 );
 
-    initMesh();
+    initMesh(positionX);
     initCamera();
     initLights();
     initRenderer();
-    $('#container').append(renderer.domElement);
+    $(`#${containerName}`).append(renderer.domElement);
     //
     // document.body.appendChild(renderer.domElement);
 }
@@ -37,12 +37,13 @@ function initLights() {
 }
 
 var mesh = null;
-function initMesh() {
+function initMesh(x) {
     var loader = new THREE.JSONLoader();
     loader.load('./testing.json', function(geometry, materials) {
         mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
         mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
-        mesh.translation = THREE.GeometryUtils.center(geometry);
+        // mesh.translation = THREE.GeometryUtils.center(geometry);
+        mesh.position.setX(x);
         scene.add(mesh);
     });
 }
@@ -59,10 +60,20 @@ function rotateMesh() {
 
 function render() {
     requestAnimationFrame(render);
-    rotateMesh();
+    for(var i=0;i<scene.children.length;i++)
+    {
+        if(scene.children[i].type==="Mesh")
+        {
+            mesh=scene.children[i];
+            rotateMesh();
+            scene.children[i]=mesh;
+        }
+    }
     renderer.render(scene, camera);
 
 }
 
-init();
+init(-2,'container1');
+render();
+init(1,'container2');
 render();
