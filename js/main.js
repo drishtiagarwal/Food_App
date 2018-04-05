@@ -4,6 +4,11 @@ var WIDTH  = window.innerWidth;
 var HEIGHT = window.innerHeight;
 
 var SPEED = 0.01;
+
+function myFunction()
+{
+	alert("The button was clicked.");
+}
 var first = -6;
 var second = -3;
 var third = 0;
