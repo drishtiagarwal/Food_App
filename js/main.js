@@ -49,24 +49,58 @@ function initLights() {
 var mesh = null;
 function initMesh(x,i) {
     var loader = new THREE.JSONLoader();
-    loader.load('./testing.json', function(geometry, materials) {
-        mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-        if(x==meshPositions[0] || x==meshPositions[4]){
-          mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.25;
-        }
-        if(x==meshPositions[1] || x==meshPositions[3]){
-          mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.50;
-        }
-        if(x==meshPositions[2]){
-          mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
-        }
-
+	  if(x==meshPositions[0]){
+			loader.load('./testing.json', function(geometry, materials){
+				mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+				mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.25;
+				mesh.position.setX(x);
+				mesh.position.setY(2);
+				initDOM(i);
+				scene.add(mesh);
+			});
+		}
+		if(x==meshPositions[1]){
+			loader.load('./testingTwo.json', function(geometry, materials){
+				mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+				mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.50;
+				mesh.position.setX(x);
+				mesh.position.setY(2);
+				initDOM(i);
+				scene.add(mesh);
+			});
+		}
+		if(x==meshPositions[2]){
+			loader.load('./testingThree.json', function(geometry, materials){
+				mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+				mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
+				mesh.position.setX(x);
+				mesh.position.setY(2);
+				initDOM(i);
+				scene.add(mesh);
+			});
+		}
+		if(x==meshPositions[3]){
+			loader.load('./testingFour.json', function(geometry, materials){
+				mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+				mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.50;
+				mesh.position.setX(x);
+				mesh.position.setY(2);
+				initDOM(i);
+				scene.add(mesh);
+			});
+		}
+		if(x==meshPositions[4]){
+			loader.load('./testingFive.json', function(geometry, materials){
+				mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+				mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.25;
+				mesh.position.setX(x);
+				mesh.position.setY(2);
+				initDOM(i);
+				scene.add(mesh);
+			});
+		}
         // mesh.translation = THREE.GeometryUtils.center(geometry);
-        mesh.position.setX(x);
-        mesh.position.setY(2);
-        initDOM(i);
-        scene.add(mesh);
-    });
+
 }
 
 function rotateMesh() {
@@ -106,7 +140,15 @@ function initDOM(meshNo){
         for(var i=meshNo-1;i>=0;i--)
         {
             scene.children[i+1].position.setX(j);
-            scene.children[i+1].scale.x=scene.children[i+1].scale.y=scene.children[i+1].scale.z=0.5;
+						if(j==meshPositions[0] || j==meshPositions[4]){
+		          scene.children[i+1].scale.x=scene.children[i+1].scale.y=scene.children[i+1].scale.z=0.25;
+		        }
+		        if(j==meshPositions[1] || j==meshPositions[3]){
+		          scene.children[i+1].scale.x=scene.children[i+1].scale.y=scene.children[i+1].scale.z=0.50;
+		        }
+		        if(j==meshPositions[2]){
+		          scene.children[i+1].scale.x=scene.children[i+1].scale.y=scene.children[i+1].scale.z=0.75;
+		        }
             console.log(i+" "+j);
             j-=3;
         }
@@ -114,7 +156,16 @@ function initDOM(meshNo){
         for(var i=meshNo+1;i<scene.children.length-1;i++)
         {
             scene.children[i+1].position.setX(j);
-            scene.children[i+1].scale.x=scene.children[i+1].scale.y=scene.children[i+1].scale.z=0.5;
+						if(j==meshPositions[0] || j==meshPositions[4]){
+		          scene.children[i+1].scale.x=scene.children[i+1].scale.y=scene.children[i+1].scale.z=0.25;
+		        }
+		        if(j==meshPositions[1] || j==meshPositions[3]){
+		          scene.children[i+1].scale.x=scene.children[i+1].scale.y=scene.children[i+1].scale.z=0.50;
+		        }
+		        if(j==meshPositions[2]){
+		          scene.children[i+1].scale.x=scene.children[i+1].scale.y=scene.children[i+1].scale.z=0.75;
+		        }
+
             console.log(i+" "+j);
             j+=3;
         }
@@ -128,4 +179,3 @@ for(var i=1;i<meshPositions.length;i++)
     initMesh(meshPositions[i],i);
 }
 render();
-
