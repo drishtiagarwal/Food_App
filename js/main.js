@@ -19,7 +19,7 @@ function init(positionX,containerName) {
 }
 
 function initCamera() {
-    camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT, 1, 10);
+    camera = new THREE.PerspectiveCamera(90, WIDTH / HEIGHT, 1, 10);
     camera.position.set(0, 3.5, 5);
     camera.lookAt(scene.position);
 }
@@ -73,7 +73,12 @@ function render() {
 
 }
 
-init(-2,'container1');
+init(-8,'container1');
 render();
-init(1,'container2');
-render();
+initMesh(-5);
+initMesh(-2);
+initMesh(1);
+initMesh(4);
+initMesh(7);
+initMesh(10);
+initMesh(13);
