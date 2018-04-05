@@ -5,15 +5,15 @@ var HEIGHT = window.innerHeight;
 
 var SPEED = 0.01;
 
-function init(x) {
+function init(positionX,containerName) {
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xf0f0f0 );
 
-    initMesh(x);
+    initMesh(positionX);
     initCamera();
     initLights();
     initRenderer();
-    $('#container').append(renderer.domElement);
+    $(`#${containerName}`).append(renderer.domElement);
     //
     // document.body.appendChild(renderer.domElement);
 }
@@ -73,6 +73,7 @@ function render() {
 
 }
 
-init(-2);
-initMesh(1);
+init(-2,'container1');
+render();
+init(1,'container2');
 render();
