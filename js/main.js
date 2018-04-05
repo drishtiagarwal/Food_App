@@ -5,6 +5,9 @@ var HEIGHT = window.innerHeight;
 
 var SPEED = 0.01;
 
+function myFunction() {
+    alert("The button was clicked.");}
+
 function init(positionX,containerName) {
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xf0f0f0 );
